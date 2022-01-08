@@ -1,0 +1,22 @@
+{
+  "name": "threejsspinningcoin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sp1424/threeJsSpinningCoin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sp1424/threeJsSpinningCoin/issues"
+  },
+  "homepage": "https://github.com/sp1424/threeJsSpinningCoin#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
