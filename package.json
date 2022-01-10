@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/sp1424/threeJsSpinningCoin#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "three": "^0.136.0"
   }
 }
