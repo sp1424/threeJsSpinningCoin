@@ -1,21 +1,29 @@
-import * as THREE from './node_modules/three/build/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js';
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/loaders/GLTFLoader.js';
 
 const renderer = new THREE.WebGLRenderer();
+renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
-
-const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 500 );
-camera.position.set( 0, 0, 100 );
+const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
+camera.position.set( 0, 1000, 0 );
 camera.lookAt( 0, 0, 0 );
-
 const scene = new THREE.Scene();
-const material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
-const points = [];
-points.push( new THREE.Vector3( - 10, 0, 0 ) );
-points.push( new THREE.Vector3( 0, 10, 0 ) );
-points.push( new THREE.Vector3( 10, 0, 0 ) );
+const loader = new GLTFLoader();
+const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444, 0.4 );
+hemiLight.position.set( 0, 20, 0 );
+scene.add( hemiLight );
 
-const geometry = new THREE.BufferGeometry().setFromPoints( points );
-const line = new THREE.Line( geometry, material );
-scene.add( line );
-renderer.render( scene, camera );
+const dirLight = new THREE.DirectionalLight( 0xffffff, 0.8 );
+dirLight.position.set( - 3, 10, - 10 );
+scene.add( dirLight )
+
+loader.load('./2CylinderEngine.glb', 
+    (gltf) => {
+        scene.add(gltf.scene);
+        renderer.render( scene, camera );
+    },
+    undefined, (error) => {
+        console.log(error);
+    }
+);
